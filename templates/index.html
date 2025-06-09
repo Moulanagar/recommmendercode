@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PeerHire Recommendation</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Freelancer Recommendation Demo</h1>
+    <form id="matchForm">
+        <textarea id="inputJson" rows="15" cols="80">
+{
+  "project": {
+    "clientId": "client_123",
+    "projectId": "proj_001",
+    "description": "Build a web app using FastAPI and React",
+    "projecttype": ["Web Development"],
+    "skills": ["FastAPI", "React", "Python"],
+    "budget": 1000,
+    "timeline": 15
+  },
+  "freelancers": [
+    {
+      "flancerId": "fl_001",
+      "skills": ["FastAPI", "Python"],
+      "favouriteProject": "Built REST APIs for an e-commerce app",
+      "rating": 5,
+      "experince": 3,
+      "bid": 900,
+      "exp_timeline": 12,
+      "proposal": "Experienced in FastAPI and backend systems"
+    }
+  ]
+}
+        </textarea><br>
+        <button type="submit">Recommend</button>
+    </form>
+    <pre id="response"></pre>
+
+    <script>
+        document.getElementById("matchForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const response = await fetch("/api/v1/recommend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: document.getElementById("inputJson").value
+            });
+            const result = await response.json();
+            document.getElementById("response").innerText = JSON.stringify(result, null, 2);
+        };
+    </script>
+</body>
+</html>
