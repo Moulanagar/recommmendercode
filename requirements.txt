@@ -51,9 +51,9 @@
 
 
 #Ml reuirements
+numpy
 fastapi
 uvicorn
-numpy
 joblib
 torch==2.1.0
 spacy
