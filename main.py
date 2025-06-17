@@ -3,7 +3,7 @@ from app.api.v1.routes import routes
 
 app = FastAPI()
 
-app.include_router(routes.router, prefix="/api/v1")
+app.include_router(routes, prefix="/api/v1")
 
 
 from fastapi.staticfiles import StaticFiles

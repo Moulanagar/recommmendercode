@@ -21,3 +21,4 @@ def root():
 def recommend_top_freelancers(data: MatchRequest):
     return recommend_freelancers(data.project, data.freelancers)
 
+routes=router
