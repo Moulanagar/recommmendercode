@@ -13,15 +13,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Python dependencies early to cache better
 COPY requirements.txt .
 
-# Pre-install sentence-transformers (to prevent model download at runtime)
-RUN pip install --upgrade pip
+# Step 1: Upgrade pip and install numpy first
+RUN pip install --upgrade pip && pip install numpy
+
+# Step 2: Now install the rest of the requirements
 RUN pip install -r requirements.txt
 
 # Copy rest of the app code (after dependencies to leverage Docker cache)
 COPY . .
 
-# Ensure model is already available in local path
-# Optional: check that `models/minilm_model/config.json` etc. exist in your repo
+# Optional: pre-download sentence-transformers model if needed
+# RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
 
 # Expose FastAPI default port
 EXPOSE 8000
