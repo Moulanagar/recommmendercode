@@ -3,11 +3,12 @@ import pickle
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
-from sentence_transformers import SentenceTransformer
 import xgboost as xgb
+from sentence_transformers import SentenceTransformer
 
-# Load pre-trained embedding model
-model1 = SentenceTransformer('all-MiniLM-L6-v2')
+model_path = os.path.join(os.path.dirname(__file__), "..", "models", "minilm_model")
+model1 = SentenceTransformer(model_path)
+
 
 # Load collaborative filtering model
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "final_model.pkl")

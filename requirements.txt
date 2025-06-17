@@ -49,19 +49,17 @@
 # win32_setctime==1.2.0
 # wrapt==1.17.2
 
+
 #Ml reuirements
 fastapi
 uvicorn
 numpy
-pandas
-torch
+torch==2.1.0+cpu -f https://download.pytorch.org/whl/torch_stable.htm
 spacy
 xgboost
 scikit-learn
 sentence-transformers
 lightfm @ git+https://github.com/lyst/lightfm@master
-fastapi
-uvicorn
 scikit-learn
 pandas
 xgboost
