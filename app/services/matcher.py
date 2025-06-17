@@ -1,5 +1,6 @@
 import os
 import pickle
+import joblib
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
@@ -11,9 +12,8 @@ model1 = SentenceTransformer(model_path)
 
 
 # Load collaborative filtering model
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "model", "final_model.pkl")
-with open(MODEL_PATH, "rb") as f:
-    data = pickle.load(f)
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "model", "final_model.joblib")
+data = joblib.load(MODEL_PATH)
 cf_model = data["model"]
 dataset = data["dataset"]
 user_features = data["user_features"]
