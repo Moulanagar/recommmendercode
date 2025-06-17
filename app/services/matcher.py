@@ -6,12 +6,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 import xgboost as xgb
 from sentence_transformers import SentenceTransformer
 
-model_path = os.path.join(os.path.dirname(__file__), "..", "models", "minilm_model")
+model_path = os.path.join(os.path.dirname(__file__), "..", "model", "minilm_model")
 model1 = SentenceTransformer(model_path)
 
 
 # Load collaborative filtering model
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "final_model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "model", "final_model.pkl")
 with open(MODEL_PATH, "rb") as f:
     data = pickle.load(f)
 cf_model = data["model"]

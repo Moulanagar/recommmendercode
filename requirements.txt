@@ -53,7 +53,7 @@
 #Ml reuirements
 fastapi
 uvicorn
-numpy
+numpy<2
 torch==2.1.0
 spacy
 xgboost
