@@ -88,8 +88,13 @@ def recommend_freelancers(project, freelancers):
 
     X = success[['final_score', 'bid_diff', 'bid_ratio', 'timeline_diff', 'timeline_ratio']]
     y = success['target']
-    model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='logloss')
-    model.fit(X, y)
-    success['pred_proba'] = model.predict_proba(X)[:, 1]
+
+    if y.nunique() < 2:
+        # If y only contains one class (e.g., all 1s), assign constant prediction
+        success['pred_proba'] = 1.0 if y.iloc[0] == 1 else 0.0
+    else:
+        model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='logloss')
+        model.fit(X, y)
+        success['pred_proba'] = model.predict_proba(X)[:, 1]
 
     return success.sort_values(by='pred_proba', ascending=False).head(10)[['flancerId', 'pred_proba']]
