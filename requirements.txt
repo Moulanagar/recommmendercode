@@ -67,5 +67,5 @@ xgboost
 sentence-transformers
 python-multipart
 jinja2
-setuptools>=42
-wheel
+# setuptools>=42
+# wheel

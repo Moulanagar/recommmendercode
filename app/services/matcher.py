@@ -1,5 +1,4 @@
 import os
-import pickle
 import joblib
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
@@ -7,12 +6,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 import xgboost as xgb
 from sentence_transformers import SentenceTransformer
 
-model_path = os.path.join(os.path.dirname(__file__), "..", "model", "minilm_model")
+model_path = os.path.join(os.path.dirname(__file__), "..", "model", "minilm_model1")
 model1 = SentenceTransformer(model_path)
 
 
 # Load collaborative filtering model
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "model", "final_model.joblib")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "model", "model.joblib")
 data = joblib.load(MODEL_PATH)
 cf_model = data["model"]
 dataset = data["dataset"]
