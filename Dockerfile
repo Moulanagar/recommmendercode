@@ -9,21 +9,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install pip and numpy FIRST (before torch and sentence-transformers)
-RUN pip install --upgrade pip && pip install numpy
+# Pre-install pip and numpy before anything else
+RUN pip install --upgrade pip && pip install numpy==1.26.4
 
-# Install rest of the Python dependencies
+# COPY requirements early to leverage Docker layer caching
 COPY requirements.txt .
-RUN pip install -r requirements.txt
 
-# Copy the application code
+# Force install numpy again and ensure it's before torch
+RUN pip install --force-reinstall numpy==1.26.4 \
+    && pip install -r requirements.txt
+
+# Copy application code
 COPY . .
-
-# Optional: preload sentence-transformers model so it's bundled in the image
-# RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
 
 # Expose port
 EXPOSE 8000
 
-# Run the FastAPI app
+# Run FastAPI app
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -51,21 +51,32 @@
 
 
 #Ml reuirements
-numpy
-fastapi
-uvicorn
-joblib
-torch==2.1.0
-spacy
-xgboost
-scikit-learn
-sentence-transformers
-lightfm @ git+https://github.com/lyst/lightfm@master
-scikit-learn
-pandas
-xgboost
-sentence-transformers
-python-multipart
-jinja2
+# numpy
+# fastapi
+# uvicorn
+# joblib
+# torch==2.1.0
+# spacy
+# xgboost
+# scikit-learn
+# sentence-transformers
+# lightfm @ git+https://github.com/lyst/lightfm@master
+# scikit-learn
+# pandas
+# xgboost
+# sentence-transformers
+# python-multipart
+# jinja2
 # setuptools>=42
 # wheel
+numpy==1.26.4
+torch==2.1.2
+sentence-transformers==2.6.1
+xgboost==2.0.3
+scikit-learn==1.3.2
+pandas==2.2.2
+joblib==1.3.2
+fastapi==0.110.0
+uvicorn==0.29.0
+jinja2==3.1.3
+lightfm==1.16
