@@ -39,6 +39,9 @@ def contentMatching(freelancer_df, skills_vec, type_vec, desc_vec):
     freelancer_df['content_score'] = freelancer_df['similarity_score']
     return freelancer_df
 
+def safe_json(df):
+    return df.to_dict(orient="records")
+
 def recommend_freelancers(project, freelancers):
     freelancer_df = pd.DataFrame([f.dict() for f in freelancers])
 
@@ -96,5 +99,7 @@ def recommend_freelancers(project, freelancers):
         model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='logloss')
         model.fit(X, y)
         success['pred_proba'] = model.predict_proba(X)[:, 1]
+        success["pred_proba"] = success["pred_proba"].astype(float)
+    return safe_json(success.sort_values(by="pred_proba", ascending=False).head(10)[["flancerId", "pred_proba"]])
 
-    return success.sort_values(by='pred_proba', ascending=False).head(10)[['flancerId', 'pred_proba']]
+    # return success.sort_values(by='pred_proba', ascending=False).head(10)[['flancerId', 'pred_proba']]
